@@ -35,12 +35,11 @@ public class TaskManager {
     //public static String m
 
     public static void menuChoice() {
-        System.out.println("Test Menu");
         Scanner scanner = new Scanner(System.in);
-        String choice = "";
+        String choice;
         choice = scanner.nextLine();
 
-
+        while (scanner.hasNext()){
         switch (choice) {
             case "add":
                 System.out.println("addTask()");
@@ -59,7 +58,7 @@ public class TaskManager {
             default:
                 System.out.println("Please select a correct option.");
         }
-    }
+    }}
 
 
 
