@@ -19,6 +19,7 @@ public class TaskManager {
         //System.out.println(ConsoleColors.BLUE + "Hello, World !!!");
         readTable(FILE_NAME);
         menuOptions();
+        menuChoice();
 
     }
 
@@ -33,31 +34,34 @@ public class TaskManager {
     }
     //public static String m
 
-    public static String menuChoice() {
-//        Scanner scanner = new Scanner(System.in);
-//        String choice = "";
-//        choice = scanner.nextLine();
+    public static void menuChoice() {
+        System.out.println("Test Menu");
+        Scanner scanner = new Scanner(System.in);
+        String choice = "";
+        choice = scanner.nextLine();
 
-//        switch (choice) {
-//            case "add":
-//                addTask();
-//                break;
-//            case "remove":
-//                removeTask();
-//                break;
-//            case "list":
-//                listTask();
-//                break;
-//            case "exit":
-//                exit();
-//                break;
 
-//// other options
-//            default:
-//                System.out.println("Please select a correct option.");
-//        }
-        return "a";
+        switch (choice) {
+            case "add":
+                System.out.println("addTask()");
+                break;
+            case "remove":
+                System.out.println("removeTask()");
+                break;
+            case "list":
+                System.out.println("listTask()");
+                break;
+            case "exit":
+                System.out.println("exit()");
+                break;
+
+// other options
+            default:
+                System.out.println("Please select a correct option.");
+        }
     }
+
+
 
     public static String[][] readTable(String fileName) {
         Path path = Paths.get(FILE_NAME);
