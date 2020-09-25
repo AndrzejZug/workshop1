@@ -26,9 +26,9 @@ public class TaskManager {
     public static void menuOptions() {
 
         String[] menuOptions = {"add", "remove", "list", "exit"};
-        System.out.println(pl.coderslab.ConsoleColors.BLUE + "Please select an option:");
+        System.out.println(ConsoleColors.BLUE + "Please select an option:");
         for (String s : menuOptions) {
-            System.out.println(pl.coderslab.ConsoleColors.RESET + s);
+            System.out.println(ConsoleColors.RESET + s);
         }
 
     }
@@ -36,30 +36,34 @@ public class TaskManager {
 
     public static void menuChoice() {
         Scanner scanner = new Scanner(System.in);
-        String choice;
-        choice = scanner.nextLine();
+String choice ="";
 
-        while (scanner.hasNext()){
-        switch (choice) {
-            case "add":
-                System.out.println("addTask()");
-                break;
-            case "remove":
-                System.out.println("removeTask()");
-                break;
-            case "list":
-                System.out.println("listTask()");
-                break;
-            case "exit":
-                System.out.println("exit()");
-                break;
+        while (scanner.hasNextLine()) {
+            choice = scanner.nextLine();
+            {
+                switch (choice) {
+                    case "add":
+                        System.out.println("addTask()");
+                        break;
+                    case "remove":
+                        System.out.println("removeTask()");
+                        break;
+                    case "list":
+                        System.out.println("listTask()");
+                        break;
+                    case "exit":
+                        System.out.println("exit()");
+                        break;
 
 // other options
-            default:
-                System.out.println("Please select a correct option.");
-        }
-    }}
+                    default:
+                        System.out.println("Please select a correct option.");
 
+                }
+
+            }
+        }
+    }
 
 
     public static String[][] readTable(String fileName) {
