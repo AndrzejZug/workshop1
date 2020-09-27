@@ -95,9 +95,6 @@ public class TaskManager {
                         choice="false";
                         break;
 
-                    default:
-                        System.out.println("Please select true/false");
-
                 }
 
             }
@@ -106,12 +103,7 @@ public class TaskManager {
         tmp = choice;
 
         newTab[newTab.length - 1][2] = tmp;
-//        System.out.print(newTab[newTab.length - 1][0] + " ");
-//        System.out.print(newTab[newTab.length - 1][1] + " ");
-//        System.out.println(newTab[newTab.length - 1][2] + " ");
-//        System.out.print(newTab[newTab.length - 2][0] + " ");
-//        System.out.print(newTab[newTab.length - 2][1] + " ");
-//        System.out.println(newTab[newTab.length - 2][2] + " ");
+
         menuOptions();
 
     }
