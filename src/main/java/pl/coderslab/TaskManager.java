@@ -1,11 +1,14 @@
 package pl.coderslab;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -33,7 +36,6 @@ public class TaskManager {
         }
 
     }
-    //public static String m
 
     public static void menuChoice() {
         Scanner scanner = new Scanner(System.in);
@@ -47,7 +49,7 @@ public class TaskManager {
                         addTask();
                         break;
                     case "remove":
-                        System.out.println("removeTask()");
+                        removeTask();
                         break;
                     case "list":
                         listTask();
@@ -56,7 +58,6 @@ public class TaskManager {
                         listQuit();
                         break;
 
-// other options
                     default:
                         System.out.println("Please select a correct option.");
 
@@ -67,9 +68,6 @@ public class TaskManager {
     }
 
     public static void addTask() {
-//        array = Arrays.copyOf(array, len + 1); // copying the array
-//        array[len] = new String[2]; // creating and assigning string array to new row else it will be null
-//        array[len][0] = str
         newTab = Arrays.copyOf(newTab, newTab.length + 1);
         newTab[newTab.length - 1] = new String[3];
         Scanner scanner = new Scanner(System.in);
@@ -79,41 +77,41 @@ public class TaskManager {
         System.out.println("Please add task due date");
         tmp = scanner.nextLine();
         newTab[newTab.length - 1][1] = tmp;
-        System.out.println("Is your task extra special: true/false");
-        String choice="";
-        while  (!choice.equals("true") && !choice.equals("false")) {
-            System.out.println("Please select between true/false");
+        System.out.println("Is your task extra special: (true/false)");
+        String choice = "";
+        while (!choice.equals("true") && !choice.equals("false")) {
+
             choice = scanner.nextLine();
+            System.out.println("Type true/false");
 
         }
-            {
-                switch (choice) {
-                    case "true":
-                        choice="true";
-                        break;
-                    case "false":
-                        choice="false";
-                        break;
-
-                }
+        {
+            switch (choice) {
+                case "true":
+                    choice = "true";
+                    break;
+                case "false":
+                    choice = "false";
+                    break;
 
             }
+
+        }
 
 
         tmp = choice;
 
         newTab[newTab.length - 1][2] = tmp;
-
         menuOptions();
 
     }
 
     public static void listTask() {
 
-        for (int i = 0; i < newTab.length; i++) {
+        for (int i = 1; i <= newTab.length; i++) {
             System.out.print(i + " : ");
-            for (int j = 0; j < newTab[i].length; j++) {
-                System.out.print(newTab[i][j] + " ");
+            for (int j = 0; j < newTab[i - 1].length; j++) {
+                System.out.print(newTab[i - 1][j] + " ");
             }
             System.out.println("");
 
@@ -121,12 +119,47 @@ public class TaskManager {
         }
         menuOptions();
     }
+    public static void listTaskNoMenu() {
+
+        for (int i = 1; i <= newTab.length; i++) {
+            System.out.print(i + " : ");
+            for (int j = 0; j < newTab[i - 1].length; j++) {
+                System.out.print(newTab[i - 1][j] + " ");
+            }
+            System.out.println("");
+
+
+        }
+
+    }
 
     public static void listQuit() {
 
         System.out.println(ConsoleColors.RED + "Have a good day :)");
         System.exit(0);
         //missing writing the table changes to file
+
+    }
+
+    public static void removeTask() {
+        System.out.println("Choose task to remove (listed number)");
+        Scanner scanner = new Scanner(System.in);
+        int number = 0;
+
+        try {
+            number = scanner.nextInt();
+            while ((number <= 0) || (number > newTab.length)) {
+                System.out.println("Incorrect number - no such task. Try again:");
+                number = scanner.nextInt();
+            }
+            newTab = ArrayUtils.remove(newTab, (number - 1));
+            System.out.println("You chose to remove task " + (number));
+            System.out.println("Your current task list is following:");
+            listTask();
+        } catch (InputMismatchException e) {
+            System.out.println("Not an integer number");
+            removeTask();
+        }
 
     }
 
