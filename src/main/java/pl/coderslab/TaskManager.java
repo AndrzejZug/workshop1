@@ -80,7 +80,31 @@ public class TaskManager {
         tmp = scanner.nextLine();
         newTab[newTab.length - 1][1] = tmp;
         System.out.println("Is your task extra special: true/false");
-        tmp = scanner.nextLine();
+        String choice="";
+        while  (!choice.equals("true") && !choice.equals("false")) {
+            System.out.println("Please select between true/false");
+            choice = scanner.nextLine();
+
+        }
+            {
+                switch (choice) {
+                    case "true":
+                        choice="true";
+                        break;
+                    case "false":
+                        choice="false";
+                        break;
+
+                    default:
+                        System.out.println("Please select true/false");
+
+                }
+
+            }
+
+
+        tmp = choice;
+
         newTab[newTab.length - 1][2] = tmp;
 //        System.out.print(newTab[newTab.length - 1][0] + " ");
 //        System.out.print(newTab[newTab.length - 1][1] + " ");
@@ -95,8 +119,9 @@ public class TaskManager {
     public static void listTask() {
 
         for (int i = 0; i < newTab.length; i++) {
+            System.out.print(i + " : ");
             for (int j = 0; j < newTab[i].length; j++) {
-                System.out.print(" " + newTab[i][j]);
+                System.out.print(newTab[i][j] + " ");
             }
             System.out.println("");
 
@@ -109,6 +134,7 @@ public class TaskManager {
 
         System.out.println(ConsoleColors.RED + "Have a good day :)");
         System.exit(0);
+        //missing writing the table changes to file
 
     }
 
@@ -141,7 +167,7 @@ public class TaskManager {
                 }
                 i++;
             }
-        scanner.close();
+            scanner.close();
 
         } catch (IOException e) {
             System.out.println("Bład pliku");
