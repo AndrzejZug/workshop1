@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class TaskManager {
@@ -19,7 +17,6 @@ public class TaskManager {
     public static final String FILE_NAME = "storage/tasks.csv";
 
     public static void main(String[] args) {
-        //System.out.println(ConsoleColors.BLUE + "Hello, World !!!");
 
         newTab = readTable(FILE_NAME);
         menuOptions();
@@ -119,6 +116,7 @@ public class TaskManager {
         }
         menuOptions();
     }
+
     public static void listTaskNoMenu() {
 
         for (int i = 1; i <= newTab.length; i++) {
@@ -134,7 +132,23 @@ public class TaskManager {
     }
 
     public static void listQuit() {
+        Path path1 = Paths.get(FILE_NAME);
+        List<String> outList = new ArrayList<>();
+        String tmp = "";
+        for (int i = 0; i < newTab.length; i++) {
+            for (int j = 0; j < newTab[i].length; j++) {
+                tmp = String.join(", ", newTab[i]);
 
+            }
+
+            outList.add(tmp);
+        }
+
+        try {
+            Files.write(path1, outList);
+        } catch (IOException ex) {
+            System.out.println("Nie można zapisać pliku.");
+        }
         System.out.println(ConsoleColors.RED + "Have a good day :)");
         System.exit(0);
         //missing writing the table changes to file
@@ -165,7 +179,6 @@ public class TaskManager {
 
 
     public static String[][] readTable(String fileName) {
-        File file = new File(FILE_NAME);
         Path location = Paths.get(FILE_NAME);
         String[][] tasks = null;
         if (!Files.exists(location)) {
@@ -173,9 +186,9 @@ public class TaskManager {
             System.exit(0);
         }
         try {
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(location);
 
-            long rowCounterLong = Files.lines(location).count();
+            long rowCounterLong = Files.lines(location).count(); //zliczam liczbę wierszy w pliku, do stworzenia nowej tablicy
             int rowCounter = (int) rowCounterLong;
 
             tasks = new String[rowCounter][3];
@@ -186,7 +199,7 @@ public class TaskManager {
                 String[] split = text.split(",");
 
                 for (int j = 0; j < split.length; j++) {
-                    //System.out.print(split[j]);
+
                     tasks[i][j] = split[j];
 
                 }
@@ -195,7 +208,7 @@ public class TaskManager {
             scanner.close();
 
         } catch (IOException e) {
-            System.out.println("Bład pliku");
+            System.out.println("Błąd pliku");
         }
         return tasks;
     }
