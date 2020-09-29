@@ -2,7 +2,6 @@ package pl.coderslab;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,27 +39,25 @@ public class TaskManager {
 
         while (scanner.hasNextLine()) {
             choice = scanner.nextLine();
-            {
-                switch (choice) {
-                    case "add":
-                        addTask();
-                        break;
-                    case "remove":
-                        removeTask();
-                        break;
-                    case "list":
-                        listTask();
-                        break;
-                    case "exit":
-                        listQuit();
-                        break;
+            switch (choice) {
+                case "add":
+                    addTask();
+                    break;
+                case "remove":
+                    removeTask();
+                    break;
+                case "list":
+                    listTask();
+                    break;
+                case "exit":
+                    listQuit();
+                    break;
 
-                    default:
-                        System.out.println("Please select a correct option.");
-
-                }
+                default:
+                    System.out.println("Please select a correct option.");
 
             }
+
         }
     }
 
@@ -82,17 +79,10 @@ public class TaskManager {
             System.out.println("Type true/false");
 
         }
-        {
-            switch (choice) {
-                case "true":
-                    choice = "true";
-                    break;
-                case "false":
-                    choice = "false";
-                    break;
-
-            }
-
+        if ("true".equals(choice)) {
+            choice = "true";
+        } else if ("false".equals(choice)) {
+            choice = "false";
         }
 
 
@@ -117,19 +107,6 @@ public class TaskManager {
         menuOptions();
     }
 
-    public static void listTaskNoMenu() {
-
-        for (int i = 1; i <= newTab.length; i++) {
-            System.out.print(i + " : ");
-            for (int j = 0; j < newTab[i - 1].length; j++) {
-                System.out.print(newTab[i - 1][j] + " ");
-            }
-            System.out.println("");
-
-
-        }
-
-    }
 
     public static void listQuit() {
         Path path1 = Paths.get(FILE_NAME);
@@ -151,7 +128,7 @@ public class TaskManager {
         }
         System.out.println(ConsoleColors.RED + "Have a good day :)");
         System.exit(0);
-        //missing writing the table changes to file
+
 
     }
 
